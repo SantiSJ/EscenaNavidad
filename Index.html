@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>My first three.js app</title>
+        <style>
+            body { margin: 0; }
+        </style>
+    </head>
+    <body>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r119/three.min.js"></script>
+        <script src= "./js/inflate.min.js"></script>
+        <script src="./js/FBXLoader.js"></script>
+        <script src="./js/OrbitControls.js"></script>
+
+        <script>
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 10000 );
+            const controls = new THREE.OrbitControls(camera);
+            const renderer = new THREE.WebGLRenderer();
+            renderer.setSize( window.innerWidth, window.innerHeight );
+            document.body.appendChild( renderer.domElement );
+
+            renderer.shadowMap.enabled = true;
+
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+            
+            //ambient light
+            const light = new THREE.AmbientLight( 0xffffff, 1 ); // soft white light
+            scene.add( light ); 
+
+            //pointlight
+            const light3 = new THREE.PointLight( 0x8A1D00, 0.5, 1000 );
+                light3.decay = 2;
+                light3.position.set( -40, 70, -210 );
+                
+                light3.castShadow = true; // default false
+                
+                scene.add( light3 );
+                const sphereSize1 = 5;
+                const pointLightHelper1 = new THREE.PointLightHelper( light3, sphereSize1 );
+                scene.add( pointLightHelper1 );
+
+                const light4 = new THREE.PointLight( 0xffffff, 0.2, 1000 );
+                light4.decay = 2;
+                light4.position.set( 0, 100, 0 );
+
+                
+                light4.castShadow = true; // default false
+                scene.add( light4 );
+
+
+
+
+
+            
+
+            //texturas
+			const texture = new THREE.TextureLoader().load( "regalo1.jpg" );
+			texture.wrapS = THREE.RepeatWrapping;
+			texture.wrapT = THREE.RepeatWrapping;
+			texture.repeat.set( 2, 2 );
+
+            const texture1 = new THREE.TextureLoader().load( "regalo2.jpg" );
+			texture1.wrapS = THREE.RepeatWrapping;
+			texture1.wrapT = THREE.RepeatWrapping;
+			texture1.repeat.set( 2, 2 );
+
+            const texture2 = new THREE.TextureLoader().load( "regalo3.jpg" );
+			texture2.wrapS = THREE.RepeatWrapping;
+			texture2.wrapT = THREE.RepeatWrapping;
+			texture2.repeat.set( 2, 2 );
+
+            const texture3 = new THREE.TextureLoader().load( "arbol1.jpg" );
+			texture3.wrapS = THREE.RepeatWrapping;
+			texture3.wrapT = THREE.RepeatWrapping;
+			texture3.repeat.set( 2, 2 );
+
+            const texture4 = new THREE.TextureLoader().load( "bolas.jpg" );
+			texture4.wrapS = THREE.RepeatWrapping;
+			texture4.wrapT = THREE.RepeatWrapping;
+			texture4.repeat.set( 2, 2 );
+
+            const texture5 = new THREE.TextureLoader().load( "botas.jpg" );
+			texture5.wrapS = THREE.RepeatWrapping;
+			texture5.wrapT = THREE.RepeatWrapping;
+			texture5.repeat.set( 1, 1 );
+
+            const texture6 = new THREE.TextureLoader().load( "cable.jpg" );
+			texture6.wrapS = THREE.RepeatWrapping;
+			texture6.wrapT = THREE.RepeatWrapping;
+			texture6.repeat.set( 15, 15 );
+
+            const texture7 = new THREE.TextureLoader().load( "sofa1.jpg" );
+			texture7.wrapS = THREE.RepeatWrapping;
+			texture7.wrapT = THREE.RepeatWrapping;
+			texture7.repeat.set( 10, 10 );
+
+            const texture8 = new THREE.TextureLoader().load( "venana.jpg" );
+			texture8.wrapS = THREE.RepeatWrapping;
+			texture8.wrapT = THREE.RepeatWrapping;
+			texture8.repeat.set( 1, 1 );
+
+            const texture9 = new THREE.TextureLoader().load( "chimenea.jpg" );
+			texture9.wrapS = THREE.RepeatWrapping;
+			texture9.wrapT = THREE.RepeatWrapping;
+			texture9.repeat.set( 1, 1 );
+
+            const texture10 = new THREE.TextureLoader().load( "cojin.jpg" );
+			texture10.wrapS = THREE.RepeatWrapping;
+			texture10.wrapT = THREE.RepeatWrapping;
+			texture10.repeat.set( 1, 1 );
+
+            const texture11 = new THREE.TextureLoader().load( "estrella.jpg" );
+			texture11.wrapS = THREE.RepeatWrapping;
+			texture11.wrapT = THREE.RepeatWrapping;
+			texture11.repeat.set( 15, 15 );
+
+            const texture12 = new THREE.TextureLoader().load( "led3.jpg" );
+			texture12.wrapS = THREE.RepeatWrapping;
+			texture12.wrapT = THREE.RepeatWrapping;
+			texture12.repeat.set( 15, 15 );
+
+            const texture13 = new THREE.TextureLoader().load( "led2.jpg" );
+			texture13.wrapS = THREE.RepeatWrapping;
+			texture13.wrapT = THREE.RepeatWrapping;
+			texture13.repeat.set( 15, 15 );
+
+            const texture14 = new THREE.TextureLoader().load( "rama.jpg" );
+			texture14.wrapS = THREE.RepeatWrapping;
+			texture14.wrapT = THREE.RepeatWrapping;
+			texture14.repeat.set( 15, 15 );
+
+            const texture15 = new THREE.TextureLoader().load( "maderachime.jpg" );
+			texture15.wrapS = THREE.RepeatWrapping;
+			texture15.wrapT = THREE.RepeatWrapping;
+			texture15.repeat.set( 15, 15 );
+
+            const texture16 = new THREE.TextureLoader().load( "carbon.jpg" );
+			texture16.wrapS = THREE.RepeatWrapping;
+			texture16.wrapT = THREE.RepeatWrapping;
+			texture16.repeat.set( 15, 15 );
+
+            const texture17 = new THREE.TextureLoader().load( "mesa.jpg" );
+			texture17.wrapS = THREE.RepeatWrapping;
+			texture17.wrapT = THREE.RepeatWrapping;
+			texture17.repeat.set( 15, 15 );
+
+            const texture18 = new THREE.TextureLoader().load( "nariz.jpg" );
+			texture18.wrapS = THREE.RepeatWrapping;
+			texture18.wrapT = THREE.RepeatWrapping;
+			texture18.repeat.set( 15, 15 );
+
+            const texture19 = new THREE.TextureLoader().load( "nieve.jpg" );
+			texture19.wrapS = THREE.RepeatWrapping;
+			texture19.wrapT = THREE.RepeatWrapping;
+			texture19.repeat.set( 2, 2 );
+
+            const texture20 = new THREE.TextureLoader().load( "pared.jpg" );
+			texture20.wrapS = THREE.RepeatWrapping;
+			texture20.wrapT = THREE.RepeatWrapping;
+			texture20.repeat.set( 15, 15 );
+
+            const texture21 = new THREE.TextureLoader().load( "piso.jpg" );
+			texture21.wrapS = THREE.RepeatWrapping;
+			texture21.wrapT = THREE.RepeatWrapping;
+			texture21.repeat.set( 15, 15 );
+
+            const texture22 = new THREE.TextureLoader().load( "madera.jpg" );
+			texture22.wrapS = THREE.RepeatWrapping;
+			texture22.wrapT = THREE.RepeatWrapping;
+			texture22.repeat.set( 15, 15 );
+
+            const texture23 = new THREE.TextureLoader().load( "alfombra1.jpg" );
+			texture23.wrapS = THREE.RepeatWrapping;
+			texture23.wrapT = THREE.RepeatWrapping;
+			texture23.repeat.set( 15, 15 );
+
+            const texture24 = new THREE.TextureLoader().load( "cuadro.jpg" );
+			texture24.wrapS = THREE.RepeatWrapping;
+			texture24.wrapT = THREE.RepeatWrapping;
+			texture24.repeat.set( 2, 2 );
+
+            const texture25 = new THREE.TextureLoader().load( "cuadro1.jpg" );
+			texture25.wrapS = THREE.RepeatWrapping;
+			texture25.wrapT = THREE.RepeatWrapping;
+			texture25.repeat.set( 2, 2 );
+
+            const texture26 = new THREE.TextureLoader().load( "alfombranormal.jpg" );
+			texture26.wrapS = THREE.RepeatWrapping;
+			texture26.wrapT = THREE.RepeatWrapping;
+			texture26.repeat.set( 2, 2 );
+
+            const texture27 = new THREE.TextureLoader().load( "wood.jpg" );
+			texture27.wrapS = THREE.RepeatWrapping;
+			texture27.wrapT = THREE.RepeatWrapping;
+			texture27.repeat.set( 2, 2 );
+
+            const texture28 = new THREE.TextureLoader().load( "sofanormal1.jpg" );
+			texture28.wrapS = THREE.RepeatWrapping;
+			texture28.wrapT = THREE.RepeatWrapping;
+			texture28.repeat.set( 10, 10 );
+
+            const texture29 = new THREE.TextureLoader().load( "chimeneanormal.jpg" );
+			texture29.wrapS = THREE.RepeatWrapping;
+			texture29.wrapT = THREE.RepeatWrapping;
+			texture29.repeat.set( 2, 2);
+
+            const texture30 = new THREE.TextureLoader().load( "hojas.jpg" );
+			texture30.wrapS = THREE.RepeatWrapping;
+			texture30.wrapT = THREE.RepeatWrapping;
+			texture30.repeat.set( 10, 10);
+
+            const texture31 = new THREE.TextureLoader().load( "coal.jpg" );
+			texture31.wrapS = THREE.RepeatWrapping;
+			texture31.wrapT = THREE.RepeatWrapping;
+			texture31.repeat.set( 1, 1);
+
+            const texture32 = new THREE.TextureLoader().load( "regalos.jpg" );
+			texture32.wrapS = THREE.RepeatWrapping;
+			texture32.wrapT = THREE.RepeatWrapping;
+			texture32.repeat.set( 1, 1);
+            
+            const texture33 = new THREE.TextureLoader().load( "pisonormal.jpg" );
+			texture33.wrapS = THREE.RepeatWrapping;
+			texture33.wrapT = THREE.RepeatWrapping;
+			texture33.repeat.set( 1, 1);
+
+
+
+
+            
+            //vamos a cargar el fbx
+            const loaderM = new THREE.FBXLoader();
+                loaderM.load( 'navidad3.fbx', function ( object ) {
+
+                    object.traverse( function ( child ) {
+
+                        if ( child.isMesh ) {
+                            
+                            child.castShadow = true;
+                            child.receiveShadow = true;
+
+                            //estamos añadiendo la textura a la geometria de maya
+                            if(child.name=="regalos1"){
+
+                                child.material = new THREE.MeshPhongMaterial({
+                                    color: 0xfffffff,
+                                    map: texture,
+                                    normalMap: texture32
+                                    
+                 
+                                    
+                                });
+                                child.castShadow = true;
+                            child.receiveShadow = true;
+
+                            }
+                            if(child.name=="reaglos1"){
+
+                                child.material = new THREE.MeshPhongMaterial({
+                                color: 0xfffffff,
+                                map: texture1,
+                    
+                                    normalMap: texture1,
+                                    normalMap: texture32
+
+                                });
+                            }
+                            if(child.name=="regalos2"){
+
+                                child.material = new THREE.MeshPhongMaterial({
+                                color: 0xfffffff,
+                                map: texture2,
+                          
+                                    normalMap: texture2,
+                                    normalMap: texture32
+
+                                });
+                            }
+                            if(child.name=="arbol"){
+
+                                child.material = new THREE.MeshPhongMaterial({
+                                color: 0xfffffff,
+                                map: texture3,
+                                normalMap: texture30,
+                                
+                       
+
+                                });
+                                child.castShadow = true;
+                            child.receiveShadow = false;
+                            }
+                            if(child.name=="bolas"){
+
+                                child.material = new THREE.MeshPhongMaterial({
+                                color: 0xfffffff,
+                                map: texture4,
+                       
+
+                                });
+                                child.castShadow = true;
+                            child.receiveShadow = false;
+                            }
+                            if(child.name=="pared"){
+
+                                child.material = new THREE.MeshPhongMaterial({
+                                color: 0xfffffff,
+                                map: texture20,
+                            
+
+                                });
+                            child.receiveShadow = false;
+                            }
+                            if(child.name=="piso"){
+
+                                child.material = new THREE.MeshPhongMaterial({
+                                color: 0xfffffff,
+                                map: texture21,
+                                normalMap: texture33
+                              
+                                    
+
+                                });
+                                child.receiveShadow = true;
+                                }
+                            if(child.name=="botas"){
+
+                                child.material = new THREE.MeshPhongMaterial({
+                                color: 0xfffffff,
+                                map: texture5,
+                              
+                                
+
+                                });
+                                child.castShadow = true;
+                            child.receiveShadow = false;
+                                }
+                                if(child.name=="cables"){
+
+                                    child.material = new THREE.MeshPhongMaterial({
+                                    color: 0xfffffff,
+                                    map: texture6,
+                             
+
+                                    });
+                                    child.castShadow = true;
+                            child.receiveShadow = false;
+                                    }
+                                if(child.name=="sofas1"){
+
+                                    child.material = new THREE.MeshPhongMaterial({
+                                    color: 0xfffffff,
+                                    map: texture7,
+                                    normalMap: texture28,
+                           
+                                    });
+                                    child.castShadow = true;
+                            child.receiveShadow = true;
+                                    }
+                                    if(child.name=="Ventana"){
+
+                                    child.material = new THREE.MeshPhongMaterial({
+                                    color: 0xfffffff,
+                                    map: texture8,
+                              
+
+                                    });
+                                    child.castShadow = true;
+                            child.receiveShadow = false;
+                                }
+                                    if(child.name=="Ventana1"){
+
+                                    child.material = new THREE.MeshPhongMaterial({
+                                    color: 0xfffffff,
+                                    map: texture8,
+                              
+                                    });
+                                    child.castShadow = true;
+                            child.receiveShadow = false;
+}
+                                    if(child.name=="chimenea"){
+
+                                    child.material = new THREE.MeshPhongMaterial({
+                                    color: 0xfffffff,
+                                    map: texture9,
+                                    normalMap: texture29
+                               
+
+                                    });
+                                    child.castShadow = true;
+                            child.receiveShadow = false;
+}
+                                    if(child.name=="cojines"){
+
+                                    child.material = new THREE.MeshPhongMaterial({
+                                    color: 0xfffffff,
+                                    map: texture10,
+                               
+
+                                    });
+                                    child.castShadow = true;
+                            child.receiveShadow = false;
+}
+                                    if(child.name=="estrella"){
+
+                                    child.material = new THREE.MeshPhongMaterial({
+                                    color: 0xfffffff,
+                                    map: texture11,
+                               
+
+                                    });
+                                    child.castShadow = true;
+                            child.receiveShadow = false;
+}
+                                    if(child.name=="led1"){
+
+                                    child.material = new THREE.MeshPhongMaterial({
+                                    color: 0xfffffff,
+                                    map: texture12,
+                               
+
+                                    });
+                                    child.castShadow = true;
+                            child.receiveShadow = false;
+}
+                                    if(child.name=="led2"){
+
+                                    child.material = new THREE.MeshPhongMaterial({
+                                    color: 0xfffffff,
+                                    map: texture13,
+                               
+
+                                    });
+                                    child.castShadow = true;
+                            child.receiveShadow = false;
+}
+                                    if(child.name=="brazo"){
+
+                                    child.material = new THREE.MeshPhongMaterial({
+                                    color: 0xfffffff,
+                                    map: texture15,
+                                    normalMap: texture27,
+                               
+
+                                    });
+                                    child.castShadow = true;
+                            child.receiveShadow = false;
+}
+                                    if(child.name=="madera"){
+
+                                    child.material = new THREE.MeshPhongMaterial({
+                                    color: 0xfffffff,
+                                    map: texture15,
+                                    normalMap: texture27,
+                               
+
+                                    });
+                                    child.castShadow = true;
+                            child.receiveShadow = false;
+}
+                                    if(child.name=="carbon"){
+
+                                    child.material = new THREE.MeshPhongMaterial({
+                                    color: 0xfffffff,
+                                    map: texture16,
+                                    normalMap: texture31
+                               
+
+                                    });
+                                    child.castShadow = true;
+                            child.receiveShadow = false;
+}
+                                    if(child.name=="mesa"){
+
+                                    child.material = new THREE.MeshPhongMaterial({
+                                    color: 0xfffffff,
+                                    map: texture17,
+                               
+
+                                    });
+                                    child.castShadow = true;
+                            child.receiveShadow = true;
+}
+                                    if(child.name=="nariz"){
+
+                                    child.material = new THREE.MeshPhongMaterial({
+                                    color: 0xfffffff,
+                                    map: texture18,
+                               
+
+                                    });
+                                    child.castShadow = true;
+                            child.receiveShadow = false;
+}
+                                    if(child.name=="muneco"){
+
+                                    child.material = new THREE.MeshPhongMaterial({
+                                    color: 0xfffffff,
+                                    map: texture19,
+                               
+
+                                    });
+                                    child.castShadow = true;
+                            child.receiveShadow = false;
+}
+                                    if(child.name=="arbolrama"){
+
+                                    child.material = new THREE.MeshPhongMaterial({
+                                    color: 0xfffffff,
+                                    map: texture22,
+                                    normalMap: texture27,
+                               
+
+                                    });
+                                    child.castShadow = true;
+                            child.receiveShadow = false;
+}
+                                    if(child.name=="venado"){
+
+                                    child.material = new THREE.MeshPhongMaterial({
+                                    color: 0xfffffff,
+                                    map: texture22,
+                                    normalMap: texture27,
+                               
+
+                                    });
+                                    child.castShadow = true;
+                            child.receiveShadow = false;
+}
+                                    if(child.name=="alfombra"){
+
+                                    child.material = new THREE.MeshPhongMaterial({
+                                    color: 0xfffffff,
+                                    map: texture23,
+                                    normalMap: texture26,
+                               
+
+                                    });
+                                    child.castShadow = true;
+                            child.receiveShadow = false;
+}
+                                    if(child.name=="marco"){
+
+                                    child.material = new THREE.MeshPhongMaterial({
+                                    color: 0xfffffff,
+                                    map: texture24,
+                               
+
+                                    });
+                                    child.castShadow = true;
+                            child.receiveShadow = false;
+}
+                                    if(child.name=="marco1"){
+
+                                    child.material = new THREE.MeshPhongMaterial({
+                                    color: 0xfffffff,
+                                    map: texture25,
+                               
+
+                                    });
+                                    child.castShadow = true;
+                            child.receiveShadow = false;
+}
+
+
+                        }
+
+                    } );
+                    object.position.y-=2
+                    object.position.z-=250
+
+                scene.add( object );
+
+            } );
+
+            camera.position.z = 500;
+            camera.position.y= 500;
+           
+            const animate = function () {
+                requestAnimationFrame( animate );
+
+
+                renderer.render( scene, camera );
+            };
+
+            animate();
+        </script>
+    </body>
+</html>
